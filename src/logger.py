@@ -19,8 +19,3 @@ logger.add(
     colorize=True,
     filter=to_utc
 )
-logger.add(
-    sys.stderr,
-    colorize=True,
-    filter=to_utc
-)
