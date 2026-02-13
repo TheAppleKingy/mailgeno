@@ -14,7 +14,6 @@ class AbstractEmailSenderApp(ABC):
         self._conn_url = conn_url
         self._listen_for = listen_for
 
-    @overload
     @abstractmethod
     async def validate_data(self, data: IncomingData) -> dict[str, str]: ...
 

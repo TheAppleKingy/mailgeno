@@ -5,7 +5,7 @@ class Config(BaseSettings):
     sender: str
     password: str
     host: str
-    port: str
+    port: int
 
 
-conf = Config()
+conf = Config()  # type: ignore

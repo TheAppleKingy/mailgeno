@@ -11,9 +11,9 @@ from src.logger import logger
 class RabbitEmailSenderApp(AbstractEmailSenderApp, LoopLockMixin):
     def __init__(self, conn_url: str, listen_for: str):
         super().__init__(conn_url, listen_for)
-        self._connection: AbstractRobustConnection = None
-        self._channel: AbstractRobustChannel = None
-        self._queue: AbstractRobustQueue = None
+        self._connection: AbstractRobustConnection = None  # type: ignore
+        self._channel: AbstractRobustChannel = None  # type: ignore
+        self._queue: AbstractRobustQueue = None  # type: ignore
 
     async def validate_data(self, data: AbstractIncomingMessage) -> dict[str, str]:
         return json.loads(data.body.decode())
