@@ -28,13 +28,14 @@ Run the container:
 docker run theapplekingy/mailgeno:latest
 ```
 Requred parameters:
-- `-c` - URL on wich mailgeno will work. Default value: `http://localhost:8052`. It means that mailgeno will work for 8052 HTTP port
+- `-c` - URL on wich mailgeno will work. Default value: `http://localhost:8052`. It means that mailgeno will work for 8052 HTTP port. In HTTP case listening port defines by provided `-c` value.
+
 - `-r` - resource that mailgeno will listen for. Default value: `mail`. It means that your apps can send email using mailgeno via request on `http://<container_hostname>:8052/mail` if `-c` provided to use HTTP. 
 
 In current version mailgeno support integration with RabbitMQ. To use mailgeno with RabbitMQ run:
 
 ```bash
-docker run theapplekingy/mailgeno:latest -c amqp://<rmq_user>:<rmq_password>@<rmq_host>
+docker run theapplekingy/mailgeno:latest -c amqp://<rmq_user>:<rmq_password>@<rmq_host>:<rmq_port>
 ```
 By default classic durable queue with name **mail** will be created. If need to specify queue name manually provide also `-r`.
 
