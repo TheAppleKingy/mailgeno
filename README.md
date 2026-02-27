@@ -43,7 +43,7 @@ By default classic durable queue with name **mail** will be created. If need to 
 
 ## 📦 Usage
 
-mailgeno is fully asynchronous service. So when mailgeno get task it starts `asycio.Task` in which mail will be sent. All available interfaces wait json data with fields:
+mailgeno is fully asynchronous service. So when mailgeno get task it starts background `asycio.Task` within wich mail will be sent. All available interfaces wait json data with fields:
  - **to** - recipient email
  - **topic** - subject of mail
  - **message** - message text of mail
