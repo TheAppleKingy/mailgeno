@@ -1,13 +1,13 @@
 import asyncio
 
-from src.logger import logger
+from mailgeno.logger import logger
 
 
 class LoopLockMixin:
-    async def keep(self):
+    async def lock(self):
         try:
             while True:
-                await asyncio.sleep(60*2)
+                await asyncio.sleep(60*5)
                 logger.info("mailgeno healthy")
         except asyncio.CancelledError:
             logger.info("mailgeno shutting down...")

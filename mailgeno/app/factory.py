@@ -1,8 +1,8 @@
 from urllib.parse import urlparse
 
-from src.app.base import AbstractEmailSenderApp
-from src.app.http import HttpEmailSenderApp
-from src.app.rabbit import RabbitEmailSenderApp
+from mailgeno.app.base import AbstractEmailSenderApp
+from mailgeno.app.http import HttpEmailSenderApp
+from mailgeno.app.rabbit import RabbitEmailSenderApp
 
 
 class AppFactory:

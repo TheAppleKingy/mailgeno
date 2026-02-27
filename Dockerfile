@@ -13,7 +13,7 @@ RUN poetry config virtualenvs.create false && \
     poetry install --no-root --no-interaction --no-ansi
 
 ENV PYTHONPATH="/app"
-COPY ./src ./src
+COPY ./mailgeno ./mailgeno
 
-ENTRYPOINT [ "python" , "-u", "src/main.py" ]
+ENTRYPOINT [ "python" , "-u", "mailgeno/main.py" ]
 CMD [ "-c", "http://localhost:8052", "-r", "mail" ]

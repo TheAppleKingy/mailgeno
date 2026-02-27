@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import TypeVar, Any, Awaitable, Callable, overload
+from typing import TypeVar, Any, Awaitable, Callable
 
-from src.dto import MessageData
-from src.sender import send_mail
-from src.logger import logger
+from mailgeno.dto import MessageData
+from mailgeno.sender import send_mail
+from mailgeno.logger import logger
 
 IncomingData = TypeVar("IncomingData", bound=Any)
 HandlerType = Callable[[IncomingData], Awaitable[Any]]
@@ -29,7 +29,7 @@ class AbstractEmailSenderApp(ABC):
             except Exception as e:
                 ok = False
                 logger.error(f"Error occured: {e}")
-            return self.return_func(ok)
+            return await self.return_func(ok)
         return handler
 
     @abstractmethod

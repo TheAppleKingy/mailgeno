@@ -2,8 +2,8 @@ import asyncio
 
 import click
 
-from src.logger import logger
-from src.app.factory import AppFactory
+from mailgeno.logger import logger
+from mailgeno.app.factory import AppFactory
 
 
 @click.command()
@@ -16,7 +16,7 @@ def main(conn_url: str, resource: str):
     except Exception as e:
         logger.error(f"Unable to resolve app: {e}")
         return
-    logger.info(f"mailgeno app starting")
+    logger.info("mailgeno app starting")
     asyncio.run(app.run())
 
 

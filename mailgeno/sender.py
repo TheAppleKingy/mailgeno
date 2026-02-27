@@ -3,8 +3,8 @@ import asyncio
 
 from email.message import EmailMessage
 
-from src.config import conf
-from src.logger import logger
+from mailgeno.config import conf
+from mailgeno.logger import logger
 
 
 MAX_RETRIES = 5
@@ -16,7 +16,7 @@ def _build_message(
     text: str
 ) -> EmailMessage:
     message = EmailMessage()
-    message['From'] = conf.sender
+    message['From'] = conf.mailgeno_sender
     message['To'] = to
     message['Subject'] = topic
     message.set_content(text)
@@ -24,8 +24,8 @@ def _build_message(
 
 
 async def _call_send(msg: EmailMessage):
-    async with aiosmtplib.SMTP(hostname=conf.host, port=conf.port, use_tls=True) as cli:
-        await cli.login(conf.sender, conf.password)
+    async with aiosmtplib.SMTP(hostname=conf.mailgeno_host, port=conf.mailgeno_port, use_tls=True) as cli:
+        await cli.login(conf.mailgeno_sender, conf.mailgeno_password)
         await cli.send_message(msg)
 
 

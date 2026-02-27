@@ -1,25 +1,23 @@
-import asyncio
-
 from urllib.parse import urlparse
 
 from aiohttp import web
 
-from src.logger import logger
-from src.app.base import AbstractEmailSenderApp
+from mailgeno.logger import logger
+from mailgeno.app.base import AbstractEmailSenderApp
 from .loop_lock import LoopLockMixin
 
 
 class HttpEmailSenderApp(AbstractEmailSenderApp, LoopLockMixin):
     def __init__(self, conn_url: str, listen_for: str):
         super().__init__(conn_url, listen_for)
-        self._app: web.Application = None
-        self._runner: web.AppRunner = None
-        self._site: web.TCPSite = None
+        self._app: web.Application = None  # type: ignore
+        self._runner: web.AppRunner = None  # type: ignore
+        self._site: web.TCPSite = None  # type: ignore
 
     async def validate_data(self, data: web.Request) -> dict[str, str]:
         return await data.json()
 
-    def return_func(self, ok: bool):
+    async def return_func(self, ok: bool):
         if ok:
             return web.json_response({"detail": "Email sent"})
         return web.json_response({"error": "Email was not sent. See logs"})
@@ -34,4 +32,4 @@ class HttpEmailSenderApp(AbstractEmailSenderApp, LoopLockMixin):
         self._site = web.TCPSite(self._runner, host="0.0.0.0", port=port)
         await self._site.start()
         logger.info("HttpEmailSenderApp started. Ready to accept requests")
-        await self.keep()
+        await self.lock()
