@@ -28,7 +28,7 @@ class RabbitEmailSenderApp(AbstractEmailSenderApp, LoopLockMixin):
     async def run(self):
         self._connection = await connect_robust(self._conn_url)
         self._channel = await self._connection.channel()
-        self._queue = await self._channel.declare_queue(self._listen_for, durable=False)
+        self._queue = await self._channel.declare_queue(self._listen_for, durable=True)
         await self._queue.consume(self.on_event(), no_ack=True)
         logger.info("RabbitEmailSenderApp started. Ready to accept tasks")
         await self.lock()
